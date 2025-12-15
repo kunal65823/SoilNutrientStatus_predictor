@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Soil Nutrient Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <i class="fas fa-brain"></i>
+                    AI-Powered Soil Nutrient Predictor
+                </h1>
+                <p class="subtitle">Advanced machine learning algorithms analyze your soil parameters for precise
+                    nutrient predictions</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="predictor-container">
+                <!-- Input Panel -->
+                <div class="input-panel">
+                    <div class="panel-header">
+                        <h3>
+                            <i class="fas fa-sliders-h"></i>
+                            Soil Parameters
+                        </h3>
+                        <button class="btn btn-small btn-outline" id="resetBtn">
+                            <i class="fas fa-undo"></i>
+                            Reset
+                        </button>
+                    </div>
+
+                    <form id="soilForm" class="advanced-form">
+                        <!-- pH Level -->
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="pH">pH Level</label>
+                                <div class="parameter-info">
+                                    <i class="fas fa-info-circle" title="Soil acidity/alkalinity level"></i>
+                                    <span class="hint">4.0 - 9.0</span>
+                                </div>
+                            </div>
+                            <div class="range-group">
+                                <input type="range" id="pH" min="4" max="9" step="0.1" value="6.5">
+                                <div class="range-value" id="pHValue">6.5</div>
+                            </div>
+                            <div class="parameter-status" id="pHStatus">Optimal</div>
+                        </div>
+
+                        <!-- Temperature -->
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="temperature">Temperature</label>
+                                <div class="parameter-info">
+                                    <i class="fas fa-info-circle" title="Soil temperature in Celsius"></i>
+                                    <span class="hint">15°C - 35°C</span>
+                                </div>
+                            </div>
+                            <div class="range-group">
+                                <input type="range" id="temperature" min="15" max="35" step="0.5" value="25">
+                                <div class="range-value" id="temperatureValue">25°C</div>
+                            </div>
+                            <div class="parameter-status" id="temperatureStatus">Good</div>
+                        </div>
+
+                        <!-- Moisture -->
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="moisture">Moisture Content</label>
+                                <div class="parameter-info">
+                                    <i class="fas fa-info-circle" title="Soil moisture percentage"></i>
+                                    <span class="hint">20% - 80%</span>
+                                </div>
+                            </div>
+                            <div class="range-group">
+                                <input type="range" id="moisture" min="20" max="80" step="1" value="50">
+                                <div class="range-value" id="moistureValue">50%</div>
+                            </div>
+                            <div class="parameter-status" id="moistureStatus">Adequate</div>
+                        </div>
+
+                        <!-- Electrical Conductivity -->
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="ec">Electrical Conductivity</label>
+                                <div class="parameter-info">
+                                    <i class="fas fa-info-circle" title="Soil salinity level"></i>
+                                    <span class="hint">0.1 - 3.0 dS/m</span>
+                                </div>
+                            </div>
+                            <div class="range-group">
+                                <input type="range" id="ec" min="0.1" max="3" step="0.1" value="1.2">
+                                <div class="range-value" id="ecValue">1.2 dS/m</div>
+                            </div>
+                            <div class="parameter-status" id="ecStatus">Normal</div>
+                        </div>
+
+                        <!-- Organic Carbon -->
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="organicCarbon">Organic Carbon</label>
+                                <div class="parameter-info">
+                                    <i class="fas fa-info-circle" title="Organic matter content"></i>
+                                    <span class="hint">0.5% - 4.0%</span>
+                                </div>
+                            </div>
+                            <div class="range-group">
+                                <input type="range" id="organicCarbon" min="0.5" max="4" step="0.1" value="2.2">
+                                <div class="range-value" id="organicCarbonValue">2.2%</div>
+                            </div>
+                            <div class="parameter-status" id="organicCarbonStatus">Good</div>
+                        </div>
+
+                        <!-- Soil Type -->
+                        <div class="form-group">
+                            <label for="soilType">Soil Type</label>
+                            <select id="soilType" class="advanced-select">
+                                <option value="clay">Clay</option>
+                                <option value="sandy" selected>Sandy</option>
+                                <option value="loam">Loam</option>
+                                <option value="silt">Silt</option>
+                                <option value="peat">Peat</option>
+                                <option value="chalk">Chalk</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-predict">
+                            <i class="fas fa-brain"></i>
+                            <span>Analyze Soil</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-panel" id="resultsPanel">
+                    <div class="panel-header">
+                        <h3>
+                            <i class="fas fa-chart-pie"></i>
+                            Analysis Results
+                        </h3>
+                        <div class="confidence-badge">
+                            <span>Confidence: <strong id="confidenceLevel">--</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Nutrient Predictions -->
+                    <div class="nutrient-predictions">
+                        <div class="nutrient-card nitrogen-card">
+                            <div class="nutrient-header">
+                                <div class="nutrient-icon">N</div>
+                                <div class="nutrient-info">
+                                    <h4>Nitrogen</h4>
+                                    <span class="nutrient-status" id="nitrogenStatus">Ready</span>
+                                </div>
+                            </div>
+                            <div class="nutrient-value" id="nitrogenValue">--</div>
+                            <div class="nutrient-bar">
+                                <div class="bar-fill nitrogen-fill" id="nitrogenBar"></div>
+                            </div>
+                            <div class="nutrient-description" id="nitrogenDesc">Click analyze to see results</div>
+                        </div>
+
+                        <div class="nutrient-card phosphorus-card">
+                            <div class="nutrient-header">
+                                <div class="nutrient-icon">P</div>
+                                <div class="nutrient-info">
+                                    <h4>Phosphorus</h4>
+                                    <span class="nutrient-status" id="phosphorusStatus">Ready</span>
+                                </div>
+                            </div>
+                            <div class="nutrient-value" id="phosphorusValue">--</div>
+                            <div class="nutrient-bar">
+                                <div class="bar-fill phosphorus-fill" id="phosphorusBar"></div>
+                            </div>
+                            <div class="nutrient-description" id="phosphorusDesc">Click analyze to see results</div>
+                        </div>
+
+                        <div class="nutrient-card potassium-card">
+                            <div class="nutrient-header">
+                                <div class="nutrient-icon">K</div>
+                                <div class="nutrient-info">
+                                    <h4>Potassium</h4>
+                                    <span class="nutrient-status" id="potassiumStatus">Ready</span>
+                                </div>
+                            </div>
+                            <div class="nutrient-value" id="potassiumValue">--</div>
+                            <div class="nutrient-bar">
+                                <div class="bar-fill potassium-fill" id="potassiumBar"></div>
+                            </div>
+                            <div class="nutrient-description" id="potassiumDesc">Click analyze to see results</div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="recommendations-section" id="recommendationsSection">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i>
+                            AI Recommendations
+                        </div>
+                        <div class="recommendations-grid" id="recommendationsList">
+                            <p class="placeholder-text">Run analysis to see AI recommendations</p>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Analysis -->
+                    <div class="analysis-details" id="analysisDetails">
+                        <div class="section-title">
+                            <i class="fas fa-microscope"></i>
+                            Detailed Analysis
+                        </div>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Soil Health Score</span>
+                                <span class="detail-value" id="healthScore">--</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fertility Index</span>
+                                <span class="detail-value" id="fertilityIndex">--</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Risk Assessment</span>
+                                <span class="detail-value" id="riskAssessment">--</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Crop Suitability</span>
+                                <span class="detail-value" id="cropSuitability">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
